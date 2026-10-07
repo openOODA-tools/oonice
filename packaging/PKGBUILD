@@ -1,0 +1,21 @@
+# Maintainer: openOODA-tools <ops@openooda.org>
+pkgname=oonice-bin
+_pkgname=oonice
+pkgver=0.1.0
+pkgrel=1
+pkgdesc="Sets process scheduling priority nice value for task execution."
+arch=('x86_64')
+url="https://github.com/openOODA-tools/oonice"
+license=('Apache-2.0')
+depends=('glibc')
+provides=('oonice')
+conflicts=('oonice')
+source_x86_64=("${url}/releases/download/v${pkgver}/oonice-linux-x86_64"
+               "uninstall.sh::https://raw.githubusercontent.com/openOODA-tools/${_pkgname}/v${pkgver}/uninstall.sh")
+sha256sums_x86_64=('SKIP'
+                   'SKIP')
+
+package() {
+    install -Dm755 "${srcdir}/oonice-linux-x86_64" "${pkgdir}/usr/bin/oonice"
+    install -Dm755 uninstall.sh "${pkgdir}/usr/bin/oonice-uninstall"
+}
